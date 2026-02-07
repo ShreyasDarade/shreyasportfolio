@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shreyas Darade | Data Scientist & ML Engineer</title>
+    <meta name="description" content="Data science portfolio of Shreyas Darade - Carnegie Mellon University. Machine Learning, AI, and Data Analytics projects." />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              accent: '#0d9488',
+              'accent-light': '#14b8a6',
+            },
+            fontFamily: {
+              sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
+              mono: ['SF Mono', 'JetBrains Mono', 'monospace'],
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- AOS Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Fonts - Using SF Pro style via Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+      /* ============================================
+         APPLE-INSPIRED DESIGN SYSTEM
+         Easy to customize - just edit the variables!
+      ============================================ */
+
+      :root {
+        /* 🎨 COLORS - Edit these to change the color scheme */
+        --accent-primary: #0d9488;      /* Main accent (teal) */
+        --accent-secondary: #06b6d4;    /* Secondary accent (cyan) */
+        --accent-gradient-start: #0d9488;
+        --accent-gradient-end: #06b6d4;
+
+        /* Background colors */
+        --bg-primary: #000000;
+        --bg-secondary: #0a0a0a;
+        --bg-card: #111111;
+        --bg-card-hover: #1a1a1a;
+
+        /* Text colors */
+        --text-primary: #f5f5f7;
+        --text-secondary: #86868b;
+        --text-muted: #6e6e73;
+      }
+
+      /* Base styles */
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        letter-spacing: -0.01em;
+      }
+
+      /* Section spacing */
+      section { scroll-margin-top: 80px; }
+
+      /* ============================================
+         GRADIENT TEXT - Apple's signature style
+      ============================================ */
+      .gradient-text {
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .gradient-text-hero {
+        background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* ============================================
+         HERO SECTION - Dramatic Apple-style intro
+      ============================================ */
+      .hero-title {
+        font-size: clamp(3rem, 12vw, 8rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.25rem, 3vw, 2rem);
+        font-weight: 500;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+
+      /* ============================================
+         ANIMATIONS - Smooth Apple-like transitions
+      ============================================ */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      .fade-in-up-delay-1 { animation-delay: 0.2s; }
+      .fade-in-up-delay-2 { animation-delay: 0.4s; }
+      .fade-in-up-delay-3 { animation-delay: 0.6s; }
+      .fade-in-up-delay-4 { animation-delay: 0.8s; }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Floating animation for decorative elements */
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+      }
+
+      .float { animation: float 6s ease-in-out infinite; }
+      .float-delay { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
+
+      /* Glow effect on hover */
+      .glow-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .glow-hover:hover {
+        box-shadow: 0 0 40px rgba(13, 148, 136, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* Subtle color accents for visual interest */
+      .accent-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        margin-right: 8px;
+      }
+
+      /* Subtle border glow on cards */
+      .card-glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), transparent, rgba(6, 182, 212, 0.2));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .card-glass:hover::before {
+        opacity: 1;
+      }
+      .card-glass {
+        position: relative;
+      }
+
+      /* Subtle text shimmer on hover for links */
+      .shimmer-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .shimmer-hover::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s ease;
+      }
+      .shimmer-hover:hover::after {
+        left: 100%;
+      }
+
+      /* ============================================
+         CARDS - Glass morphism style
+      ============================================ */
+      .card-glass {
+        background: rgba(17, 17, 17, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .card-glass:hover {
+        background: rgba(26, 26, 26, 0.9);
+        border-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-4px);
+      }
+
+      /* ============================================
+         BUTTONS - Sleek Apple-style buttons
+      ============================================ */
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 30px rgba(13, 148, 136, 0.4);
+      }
+
+      .btn-secondary {
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--accent-primary);
+        background: rgba(13, 148, 136, 0.1);
+      }
+
+      /* ============================================
+         SKILL BADGES - Minimal and clean
+      ============================================ */
+      .skill-badge {
+        transition: all 0.2s ease;
+      }
+      .skill-badge:hover {
+        transform: scale(1.05);
+        background: rgba(13, 148, 136, 0.2);
+      }
+
+      /* ============================================
+         SCROLLBAR - Custom minimal scrollbar
+      ============================================ */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #444;
+      }
+
+      /* ============================================
+         DECORATIVE ELEMENTS
+      ============================================ */
+      .gradient-blur {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.15;
+        pointer-events: none;
+      }
+
+      /* Light mode overrides (optional) */
+      html:not(.dark) {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f5f5f7;
+        --bg-card: #ffffff;
+        --text-primary: #1d1d1f;
+        --text-secondary: #86868b;
+      }
+    </style>
+
+    <!-- Theme Persistence -->
+    <script>
+      function toggleTheme() {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      }
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      }
+    </script>
+  </head>
+
+  <body class="bg-black text-[#f5f5f7] antialiased overflow-x-hidden">
+    <!-- Header - Minimal Apple-style navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+      <nav class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#hero" class="text-xl font-semibold tracking-tight text-white hover:text-[#0d9488] transition-colors duration-300">
+          shreyas<span class="text-[#0d9488]">darade</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="text-sm text-[#86868b] hover:text-white transition-colors duration-300">About</a>
+          <a href="#experience" class="text-sm text-[#86868b] hover:text-white transition-colors duration-300">Experience</a>
+          <a href="#projects" class="text-sm text-[#86868b] hover:text-white transition-colors duration-300">Projects</a>
+          <a href="ResumeShreyas.pdf" target="_blank" class="text-sm px-4 py-1.5 rounded-full bg-[#0d9488] text-white hover:bg-[#14b8a6] transition-all duration-300">
+            Resume
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden p-2 text-[#86868b] hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-t border-white/5">
+        <div class="px-6 py-4 space-y-4">
+          <a href="#about" class="block text-[#86868b] hover:text-white transition-colors">About</a>
+          <a href="#experience" class="block text-[#86868b] hover:text-white transition-colors">Experience</a>
+          <a href="#projects" class="block text-[#86868b] hover:text-white transition-colors">Projects</a>
+          <a href="Resume_ShreyasDarade.pdf" target="_blank" class="inline-block px-4 py-2 rounded-full bg-[#0d9488] text-white text-sm">Resume</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================
+         HERO SECTION
+         Apple-inspired dramatic introduction
+    ============================================ -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <!-- Gradient Background Blurs - Subtle ambient glow -->
+      <div class="gradient-blur bg-[#0d9488] top-1/4 -left-64 float opacity-20"></div>
+      <div class="gradient-blur bg-[#06b6d4] bottom-1/4 -right-64 float-delay opacity-15"></div>
+      <div class="gradient-blur bg-[#8b5cf6] top-3/4 left-1/3 float opacity-10" style="width: 300px; height: 300px;"></div>
+
+      <!-- Main Content -->
+      <div class="relative z-10 max-w-6xl mx-auto px-6 pt-20 text-center">
+        <!-- Small Intro Tag -->
+        <div class="fade-in-up mb-6">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-[#86868b]">
+            <span class="w-2 h-2 bg-[#0d9488] rounded-full"></span>
+            Data Scientist · ML Engineer
+          </span>
+        </div>
+
+        <!-- Main Title - Your Name -->
+        <h1 class="hero-title text-white mb-6 fade-in-up fade-in-up-delay-1">
+          Shreyas Darade
+        </h1>
+
+        <!-- Subtitle - What You Do -->
+        <p class="hero-subtitle text-[#86868b] max-w-3xl mx-auto mb-8 fade-in-up fade-in-up-delay-2">
+          Data Scientist & ML Engineer crafting
+          <span class="text-white">intelligent systems</span> that transform
+          <span class="gradient-text">data into impact</span>
+        </p>
+
+        <!-- Brief Description -->
+        <p class="text-lg text-[#6e6e73] max-w-2xl mx-auto mb-12 fade-in-up fade-in-up-delay-3">
+          Master's grad student from <span class="text-white">Carnegie Mellon University</span> specializing in
+          Machine Learning, Data Science, and Problem Solving. Building AI solutions that solve real-world problems.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 fade-in-up fade-in-up-delay-4">
+          <a href="#projects" class="btn-primary px-8 py-4 rounded-full text-white font-medium text-lg">
+            View My Work
+          </a>
+          <a href="#contact" class="btn-secondary px-8 py-4 rounded-full text-white font-medium text-lg">
+            Connect
+          </a>
+        </div>
+
+        <!-- Stats Row - Quick Impact Numbers -->
+        <div class="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto fade-in-up fade-in-up-delay-4">
+          <div class="text-center group">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-[#0d9488] transition-colors">4.01</div>
+            <div class="text-sm text-[#6e6e73]">GPA at CMU</div>
+          </div>
+          <div class="text-center group">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-[#06b6d4] transition-colors">2</div>
+            <div class="text-sm text-[#6e6e73]">Years Analytics Experience</div>
+          </div>
+          <div class="text-center group">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-[#8b5cf6] transition-colors">150+</div>
+            <div class="text-sm text-[#6e6e73]">stakeholders benefited from analytics</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <a href="#about" class="flex flex-col items-center gap-2 text-[#6e6e73] hover:text-white transition-colors">
+          <span class="text-xs tracking-widest uppercase"></span>
+          <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         Clean, minimal introduction
+    ============================================ -->
+    <section id="about" class="py-32 px-6 bg-[#0a0a0a]">
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20" data-aos="fade-up">
+          <p class="text-[#0d9488] font-mono text-sm tracking-wider uppercase mb-4">Background</p>
+          <h2 class="text-4xl md:text-5xl font-bold text-white">Education</h2>
+        </div>
+
+        <!-- Education Card - Glass morphism with CMU Logo -->
+        <div class="card-glass rounded-3xl p-8 md:p-12 mb-16 glow-hover" data-aos="fade-up">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div class="flex items-start gap-5">
+              <!-- CMU Logo -->
+              <div class="w-16 h-16 rounded-2xl overflow-hidden shrink-0 shadow-lg">
+                <img src="img/cmu_logo.png" alt="Carnegie Mellon University Logo" class="w-full h-full object-contain">
+              </div>
+              <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Carnegie Mellon University</h3>
+                <p class="text-[#86868b] text-lg">Master's in Information Systems Management</p>
+                <p class="text-[#0d9488] font-medium mt-1">Business Intelligence & Data Analytics</p>
+                <p class="text-[#6e6e73] text-sm mt-2">Pittsburgh, PA · Aug 2024 - Dec 2025</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="text-center px-6 py-4 bg-white/5 rounded-2xl border border-white/10">
+                <div class="text-2xl font-bold text-white">4.01</div>
+                <div class="text-xs text-[#6e6e73] uppercase tracking-wider mt-1">GPA</div>
+              </div>
+              <div class="text-center px-6 py-4 bg-white/5 rounded-2xl border border-white/10">
+                <div class="text-lg font-semibold text-white">Dean's List</div>
+                <div class="text-xs text-[#6e6e73] mt-1">2024 & 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coursework - Clean single-line cards -->
+        <div data-aos="fade-up" data-aos-delay="100">
+          <p class="text-center text-[#86868b] mb-8 text-sm uppercase tracking-wider">Relevant Coursework</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#0d9488]/40 hover:bg-[#0d9488]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">Machine Learning</p>
+            </div>
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#06b6d4]/40 hover:bg-[#06b6d4]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">Deep Learning</p>
+            </div>
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#8b5cf6]/40 hover:bg-[#8b5cf6]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">Unstructured Data Analytics(NLP)</p>
+            </div>
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 hover:bg-[#f59e0b]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">Data Science & Big Data</p>
+            </div>
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#ec4899]/40 hover:bg-[#ec4899]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">ML for Problem Solving</p>
+            </div>
+            <div class="px-5 py-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-[#10b981]/40 hover:bg-[#10b981]/5 transition-all cursor-default">
+              <p class="text-[#f5f5f7] font-medium">Product Management Essentials</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ============================================
+         SKILLS SECTION
+         Clean grid with hover effects
+    ============================================ -->
+    <section id="skills" class="py-32 px-6 bg-black">
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20" data-aos="fade-up">
+          <p class="text-[#0d9488] font-mono text-sm tracking-wider uppercase mb-4">Expertise</p>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Skills & Technologies</h2>
+          <p class="text-[#86868b] text-lg max-w-2xl mx-auto">Technologies and methodologies I use to build intelligent data solutions</p>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up">
+          <!-- Programming & ML -->
+          <div class="card-glass rounded-2xl p-8 group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0d9488] to-[#06b6d4] flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white">Programming & ML</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/15 text-[#5eead4] rounded-lg text-sm border border-[#0d9488]/30 hover:bg-[#0d9488]/25 transition-colors">Python</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#06b6d4]/15 text-[#67e8f9] rounded-lg text-sm border border-[#06b6d4]/30 hover:bg-[#06b6d4]/25 transition-colors">SQL</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Java</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#06b6d4]/10 text-[#a5f3fc] rounded-lg text-sm border border-[#06b6d4]/20 hover:bg-[#06b6d4]/20 transition-colors">Scikit-Learn</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">PyTorch</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#06b6d4]/10 text-[#a5f3fc] rounded-lg text-sm border border-[#06b6d4]/20 hover:bg-[#06b6d4]/20 transition-colors">XGBoost</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Numpy</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Numpy</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Pandas</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Matplotlib</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#0d9488]/10 text-[#99f6e4] rounded-lg text-sm border border-[#0d9488]/20 hover:bg-[#0d9488]/20 transition-colors">Plotly</span>
+
+            </div>
+          </div>
+
+          <!-- Data Science -->
+          <div class="card-glass rounded-2xl p-8 group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8b5cf6] to-[#ec4899] flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white">Data Science</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge px-3 py-1.5 bg-[#8b5cf6]/15 text-[#c4b5fd] rounded-lg text-sm border border-[#8b5cf6]/30 hover:bg-[#8b5cf6]/25 transition-colors">EDA</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/15 text-[#f9a8d4] rounded-lg text-sm border border-[#ec4899]/30 hover:bg-[#ec4899]/25 transition-colors">Classification</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#8b5cf6]/10 text-[#ddd6fe] rounded-lg text-sm border border-[#8b5cf6]/20 hover:bg-[#8b5cf6]/20 transition-colors">Clustering</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/10 text-[#fbcfe8] rounded-lg text-sm border border-[#ec4899]/20 hover:bg-[#ec4899]/20 transition-colors">Regression</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#8b5cf6]/10 text-[#ddd6fe] rounded-lg text-sm border border-[#8b5cf6]/20 hover:bg-[#8b5cf6]/20 transition-colors">Deep Learning</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/10 text-[#fbcfe8] rounded-lg text-sm border border-[#ec4899]/20 hover:bg-[#ec4899]/20 transition-colors">Data Visualization</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/10 text-[#fbcfe8] rounded-lg text-sm border border-[#ec4899]/20 hover:bg-[#ec4899]/20 transition-colors">A/B Testing</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/10 text-[#fbcfe8] rounded-lg text-sm border border-[#ec4899]/20 hover:bg-[#ec4899]/20 transition-colors">NLP</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#ec4899]/10 text-[#fbcfe8] rounded-lg text-sm border border-[#ec4899]/20 hover:bg-[#ec4899]/20 transition-colors">RAG</span>
+            </div>
+          </div>
+
+          <!-- Tools & Platforms -->
+          <div class="card-glass rounded-2xl p-8 group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#f97316] flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white">Tools & Platforms</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge px-3 py-1.5 bg-[#f59e0b]/15 text-[#fcd34d] rounded-lg text-sm border border-[#f59e0b]/30 hover:bg-[#f59e0b]/25 transition-colors">Power BI</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f97316]/15 text-[#fdba74] rounded-lg text-sm border border-[#f97316]/30 hover:bg-[#f97316]/25 transition-colors">Tableau</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f59e0b]/10 text-[#fde68a] rounded-lg text-sm border border-[#f59e0b]/20 hover:bg-[#f59e0b]/20 transition-colors">Git</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f59e0b]/10 text-[#fde68a] rounded-lg text-sm border border-[#f59e0b]/20 hover:bg-[#f59e0b]/20 transition-colors">Github</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f97316]/10 text-[#fed7aa] rounded-lg text-sm border border-[#f97316]/20 hover:bg-[#f97316]/20 transition-colors">Spark</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f59e0b]/10 text-[#fde68a] rounded-lg text-sm border border-[#f59e0b]/20 hover:bg-[#f59e0b]/20 transition-colors">Jupyter</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f97316]/10 text-[#fed7aa] rounded-lg text-sm border border-[#f97316]/20 hover:bg-[#f97316]/20 transition-colors">AWS</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#f97316]/10 text-[#fed7aa] rounded-lg text-sm border border-[#f97316]/20 hover:bg-[#f97316]/20 transition-colors">Snowflake</span>
+            </div>
+          </div>
+
+          <!-- Soft Skills -->
+          <div class="card-glass rounded-2xl p-8 group">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3b82f6] to-[#6366f1] flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-white">Misc</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge px-3 py-1.5 bg-[#3b82f6]/15 text-[#93c5fd] rounded-lg text-sm border border-[#3b82f6]/30 hover:bg-[#3b82f6]/25 transition-colors">Problem Solving</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#6366f1]/15 text-[#a5b4fc] rounded-lg text-sm border border-[#6366f1]/30 hover:bg-[#6366f1]/25 transition-colors">Stakeholder Mgmt</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#3b82f6]/10 text-[#bfdbfe] rounded-lg text-sm border border-[#3b82f6]/20 hover:bg-[#3b82f6]/20 transition-colors">Product Strategy</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#6366f1]/10 text-[#c7d2fe] rounded-lg text-sm border border-[#6366f1]/20 hover:bg-[#6366f1]/20 transition-colors">Data Storytelling</span>
+              <span class="skill-badge px-3 py-1.5 bg-[#3b82f6]/10 text-[#bfdbfe] rounded-lg text-sm border border-[#3b82f6]/20 hover:bg-[#3b82f6]/20 transition-colors">Consulting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         EXPERIENCE SECTION
+         Timeline-style with impact metrics
+    ============================================ -->
+    <section id="experience" class="py-32 px-6 bg-[#0a0a0a]">
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20" data-aos="fade-up">
+          <p class="text-[#0d9488] font-mono text-sm tracking-wider uppercase mb-4">Career</p>
+          <h2 class="text-4xl md:text-5xl font-bold text-white">Experience</h2>
+        </div>
+
+        <!-- Experience Cards -->
+        <div class="space-y-8">
+
+          <!-- Job 0 - Current/Most Recent -->
+          <div class="card-glass rounded-3xl p-8 md:p-10 glow-hover" data-aos="fade-up">
+            <div class="flex flex-col lg:flex-row lg:items-start gap-8">
+              <!-- Left: Role Info -->
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="px-3 py-1 bg-[#0d9488]/20 text-[#0d9488] text-xs font-medium rounded-full">CMU Capstone</span>
+                  <span class="text-[#6e6e73] text-sm">Aug 2025 - Dec 2025</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">Data Scientist</h3>
+                <p class="text-[#0d9488] font-medium text-lg mb-4">Armada Partners · Pittsburgh, PA</p>
+                <p class="text-[#86868b] leading-relaxed">
+                  Led a team of 4 graduate students as a part of the capstone project to solve a safety stock optimization problem for a supply chain client. Defined the problem by collaborating with the business stakeholders and extensively worked with SQL in snowflake to build the datasets for training. Worked on the data science lifecycle by doing feature engineering, model training and evaluation for improving leadtime prediction. Ensured to define metrics and tie model predictions with real business value. 
+                </p>
+              </div>
+              <!-- Right: Key Tech -->
+              <div class="lg:w-48 flex flex-wrap lg:flex-col gap-2">
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Problem Solving</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Machine Learning</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Lead time modeling</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Python</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">SQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 1 - Current/Most Recent -->
+          <div class="card-glass rounded-3xl p-8 md:p-10 glow-hover" data-aos="fade-up">
+            <div class="flex flex-col lg:flex-row lg:items-start gap-8">
+              <!-- Left: Role Info -->
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <!-- <span class="px-3 py-1 bg-[#0d9488]/20 text-[#0d9488] text-xs font-medium rounded-full">Current</span> -->
+                  <span class="text-[#6e6e73] text-sm">Jun 2025 - Aug 2025</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">AI/ML Engineer Intern</h3>
+                <p class="text-[#0d9488] font-medium text-lg mb-4">Naptic LLC · Pittsburgh, PA</p>
+                <p class="text-[#86868b] leading-relaxed">
+                  Built secure and efficient AI agent workflows to solve real-world business problems in a high-paced startup environment. Used RAG agents and MCP's to make low code agents faster, structured and reliable
+                </p>
+              </div>
+              <!-- Right: Key Tech -->
+              <div class="lg:w-48 flex flex-wrap lg:flex-col gap-2">
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">AI Agents</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">LLMs</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">RAG</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Python</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">n8n</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="card-glass rounded-3xl p-8 md:p-10 glow-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex flex-col lg:flex-row lg:items-start gap-8">
+              <!-- Left: Role Info -->
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-[#6e6e73] text-sm">Sep 2022 - Aug 2024</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">Senior Analyst</h3>
+                <p class="text-[#0d9488] font-medium text-lg mb-4">GEP Worldwide · Mumbai, India</p>
+
+                <!-- Impact Metrics -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="text-center p-3 bg-[#0d9488]/5 rounded-xl border border-[#0d9488]/10">
+                    <div class="text-xl font-bold text-[#0d9488]">4+ hours</div>
+                    <div class="text-xs text-[#6e6e73]">Saved weekly</div>
+                  </div>
+                  <div class="text-center p-3 bg-[#06b6d4]/5 rounded-xl border border-[#06b6d4]/10">
+                    <div class="text-xl font-bold text-[#06b6d4]">60% reduction</div>
+                    <div class="text-xs text-[#6e6e73]">Dashboard complexity</div>
+                  </div>
+                  <div class="text-center p-3 bg-[#8b5cf6]/5 rounded-xl border border-[#8b5cf6]/10">
+                    <div class="text-xl font-bold text-[#a78bfa]">220+ stakeholders</div>
+                    <div class="text-xs text-[#6e6e73]">Overall impact and engagement</div>
+                  </div>
+                </div>
+
+                <!-- Responsibilities -->
+                <ul class="space-y-2 text-[#86868b]">
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Consulted for a Fortune 100 US client with a $4.5B indirect spend on a procurement transformation project including
+analytics insights and reporting 25+ metrics/KPIs to 220+ members for measuring the progress of the client program</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Performed exploratory data analysis on procurement data to identify cost drivers and savings opportunities</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Created executive monthly reports summarizing 15+ strategic KPIs for leadership decision-making</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Designed modular BI workbench enabling data-driven decisions on spend, savings, and contracts</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Collaborated cross-functionally with technology and facility teams on analytics platform</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-[#0d9488] mt-1">→</span>
+                    <span>Achieved 100% improvement in customer engagement through optimized dashboard deployment</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Right: Key Tech -->
+              <div class="lg:w-48 flex flex-wrap lg:flex-col gap-2">
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Python</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Power BI</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">SQL</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Analytics</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Strategy</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Stakeholder Management</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">Team collaboration</span>
+                <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-[#86868b]">ETL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <!-- ============================================
+         PROJECTS SECTION
+         Featured work with hover reveals
+    ============================================ -->
+    <section id="projects" class="py-32 px-6 bg-black">
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20" data-aos="fade-up">
+          <p class="text-[#0d9488] font-mono text-sm tracking-wider uppercase mb-4">Portfolio</p>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Featured Projects</h2>
+          <p class="text-[#86868b] text-lg max-w-2xl mx-auto">A selection of projects showcasing my expertise in ML, data science, and product thinking</p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Project 1: Carbon Emission Predictor -->
+          <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 hover:border-emerald-500/40 glow-hover" data-aos="fade-up">
+            <!-- Project Image -->
+            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-emerald-500/20 to-teal-500/20">
+              <img src="img/p1carbon.jpg" alt="Carbon Emission Predictor" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
+              <!-- Placeholder when image not available -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-emerald-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10">
+              <!-- Project Number -->
+              <span class="text-emerald-400 font-mono text-sm">01</span>
+
+              <!-- Title -->
+              <h3 class="text-2xl font-bold text-white mt-2 mb-3">Carbon Emission Predictor</h3>
+
+              <!-- Description -->
+              <p class="text-[#86868b] mb-6 leading-relaxed">
+                ML-powered recommeder that predicts CO2 emissions from lifestyle inputs and recommends sustainable alternatives using XGBoost.
+              </p>
+
+              <!-- Tech Stack -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Python</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">XGBoost</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Tkinter</span>
+              </div>
+
+              <!-- Links -->
+              <a href="#" class="inline-flex items-center gap-2 text-[#0d9488] hover:text-[#14b8a6] transition-colors">
+                <span class="text-sm font-medium">View Project</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Decorative gradient orb -->
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-emerald-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          </div>
+
+          <!-- Project 2: Smart Traffic Management -->
+          <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border border-blue-500/20 hover:border-blue-500/40 glow-hover" data-aos="fade-up" data-aos-delay="100">
+            <!-- Project Image -->
+            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
+              <img src="img/p2stms.png" alt="Smart Traffic Management" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
+              <!-- Placeholder when image not available -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-blue-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10">
+              <span class="text-blue-400 font-mono text-sm">02</span>
+              <h3 class="text-2xl font-bold text-white mt-2 mb-3">Smart Traffic Management</h3>
+              <p class="text-[#86868b] mb-6 leading-relaxed">
+                Computer vision system using OpenCV for real-time vehicle detection and custom algorithms to optimize traffic flow at intersections.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">OpenCV</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Python</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Object Detection</span>
+              </div>
+              <a href="#" class="inline-flex items-center gap-2 text-[#0d9488] hover:text-[#14b8a6] transition-colors">
+                <span class="text-sm font-medium">View Project</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-blue-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          </div>
+
+          <!-- Project 3: QuickFit AI -->
+          <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 hover:border-purple-500/40 glow-hover" data-aos="fade-up" data-aos-delay="200">
+            <!-- Project Image -->
+            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+              <img src="img/p3qfa.jpg" alt="QuickFit AI" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
+              <!-- Placeholder when image not available -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-purple-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10">
+              <span class="text-purple-400 font-mono text-sm">03</span>
+              <h3 class="text-2xl font-bold text-white mt-2 mb-3">QuickFit AI</h3>
+              <p class="text-[#86868b] mb-6 leading-relaxed">
+                End-to-end product development from market analysis to MVP for an AI-powered outfit recommendation system targeting professionals.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Product Strategy</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Market Analysis</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">MVP</span>
+              </div>
+              <a href="#" class="inline-flex items-center gap-2 text-[#0d9488] hover:text-[#14b8a6] transition-colors">
+                <span class="text-sm font-medium">View Case Study</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-purple-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          </div>
+
+          <!-- Project 4: Airbnb Analysis -->
+          <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 hover:border-orange-500/40 glow-hover" data-aos="fade-up" data-aos-delay="300">
+            <!-- Project Image -->
+            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-orange-500/20 to-red-500/20">
+              <img src="img/p4nyc.jpg" alt="Airbnb NYC Analysis" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">
+              <!-- Placeholder when image not available -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-orange-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10">
+              <span class="text-orange-400 font-mono text-sm">04</span>
+              <h3 class="text-2xl font-bold text-white mt-2 mb-3">Airbnb NYC Analysis</h3>
+              <p class="text-[#86868b] mb-6 leading-relaxed">
+                Comprehensive EDA on 30K+ listings analyzing pricing trends, neighborhood patterns, and revenue optimization strategies.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">EDA</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Visualization</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#f5f5f7]">Python</span>
+              </div>
+              <a href="#" class="inline-flex items-center gap-2 text-[#0d9488] hover:text-[#14b8a6] transition-colors">
+                <span class="text-sm font-medium">View Project</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         CONTACT SECTION
+         Clean CTA with dramatic typography
+    ============================================ -->
+    <section id="contact" class="py-32 px-6 bg-[#0a0a0a] relative overflow-hidden">
+      <!-- Background gradient -->
+      <div class="gradient-blur bg-[#0d9488] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto text-center" data-aos="fade-up">
+        <p class="text-[#0d9488] font-mono text-sm tracking-wider uppercase mb-6">What's Next?</p>
+
+        <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8">
+          Let's work<br><span class="gradient-text">together.</span>
+        </h2>
+
+        <p class="text-xl text-[#86868b] max-w-xl mx-auto mb-12 leading-relaxed">
+          I'm currently looking for new opportunities. Whether you have a question, a project idea, or just want to connect — my inbox is always open.
+        </p>
+
+        <!-- CTA Button -->
+        <a href="mailto:shreyas9220@gmail.com" class="btn-primary inline-flex items-center gap-3 px-10 py-5 rounded-full text-white font-medium text-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Say Hello
+        </a>
+
+        <!-- Social Links -->
+        <div class="mt-16 flex items-center justify-center gap-8">
+          <a href="https://github.com/ShreyasDarade" target="_blank" class="text-[#6e6e73] hover:text-[#f5f5f7] hover:scale-110 transition-all duration-300" aria-label="GitHub">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 007.87 10.95c.58.11.79-.25.79-.55v-2.1c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.21 1.79 1.21 1.04 1.78 2.72 1.26 3.38.97.11-.76.41-1.26.74-1.55-2.55-.3-5.23-1.28-5.23-5.68 0-1.25.45-2.27 1.2-3.07-.12-.29-.52-1.46.11-3.06 0 0 .98-.31 3.2 1.18a11 11 0 015.84 0c2.21-1.49 3.2-1.18 3.2-1.18.63 1.6.23 2.77.12 3.06.75.8 1.2 1.82 1.2 3.07 0 4.41-2.69 5.37-5.25 5.66.42.37.8 1.09.8 2.2v3.26c0 .31.2.67.8.55A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/shreyasdarade/" target="_blank" class="text-[#6e6e73] hover:text-[#0077b5] hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="mailto:shreyas9220@gmail.com" class="text-[#6e6e73] hover:text-[#0d9488] hover:scale-110 transition-all duration-300" aria-label="Email">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         Minimal and clean
+    ============================================ -->
+    <footer class="py-8 px-6 bg-black border-t border-white/5">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-[#6e6e73]">
+          Designed & Built by <span class="text-[#f5f5f7]">Shreyas Darade</span>
+        </p>
+        <p class="text-sm text-[#6e6e73]">
+          © 2025 All rights reserved
+        </p>
+      </div>
+    </footer>
+
+    <!-- Alpine.js -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+  </script>
+  </body>
+</html>
